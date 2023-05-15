@@ -3,9 +3,7 @@ package cn.itedus.lottery.test;
 import cn.itedus.lottery.domain.strategy.model.req.DrawReq;
 import cn.itedus.lottery.domain.strategy.service.draw.IDrawExec;
 import cn.itedus.lottery.infrastructure.dao.IActivityDao;
-import cn.itedus.lottery.infrastructure.dao.IStrategyDao;
 import cn.itedus.lottery.infrastructure.po.Activity;
-import cn.itedus.lottery.infrastructure.po.Strategy;
 import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +15,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.annotation.Resource;
 import java.util.Date;
 
+/**
+ * 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
+ * 公众号：bugstack虫洞栈
+ * Create by 小傅哥(fustack)
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SpringRunnerTest {
@@ -29,22 +32,12 @@ public class SpringRunnerTest {
     @Resource
     private IDrawExec drawExec;
 
-    @Resource
-    private IStrategyDao strategyDao;
-
     @Test
     public void test_drawExec() {
-        drawExec.doDrawExec(new DrawReq("小傅哥", 100001L));
-        drawExec.doDrawExec(new DrawReq("小佳佳", 100001L));
-        drawExec.doDrawExec(new DrawReq("小蜗牛", 100001L));
-        drawExec.doDrawExec(new DrawReq("八杯水", 100001L));
-    }
-
-    @Test
-    public void test_select_strategy() {
-        Strategy strategy = strategyDao.queryStrategy(100001L);
-        logger.info("测试结果：{}", JSON.toJSONString(strategy));
-
+        drawExec.doDrawExec(new DrawReq("小傅哥", 10001L));
+        drawExec.doDrawExec(new DrawReq("小佳佳", 10001L));
+        drawExec.doDrawExec(new DrawReq("小蜗牛", 10001L));
+        drawExec.doDrawExec(new DrawReq("八杯水", 10001L));
     }
 
     @Test
