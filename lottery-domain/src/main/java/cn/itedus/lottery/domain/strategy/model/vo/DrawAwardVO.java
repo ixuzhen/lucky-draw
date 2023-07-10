@@ -8,7 +8,12 @@ import java.util.Date;
  * @date: 2021/8/28
  * @Copyright： 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
  */
-public class DrawAwardInfo {
+public class DrawAwardVO {
+
+    /**
+     * 用户ID
+     */
+    private String uId;
 
     /**
      * 奖品ID
@@ -44,14 +49,27 @@ public class DrawAwardInfo {
      */
     private Date grantDate;
 
-    public DrawAwardInfo() {
+    public DrawAwardVO() {
     }
 
-    public DrawAwardInfo(String awardId, Integer awardType, String awardName,String awardContent) {
+    public DrawAwardVO(String uId, String awardId, Integer awardType, String awardName, String awardContent) {
+        this.uId = uId;
         this.awardId = awardId;
         this.awardType = awardType;
         this.awardName = awardName;
         this.awardContent = awardContent;
+    }
+
+    public String getuId() {
+        return uId;
+    }
+
+    public void setuId(String uId) {
+        this.uId = uId;
+    }
+
+    public DrawAwardVO(String uId) {
+        this.uId = uId;
     }
 
     public String getAwardId() {
@@ -108,5 +126,18 @@ public class DrawAwardInfo {
 
     public void setGrantDate(Date grantDate) {
         this.grantDate = grantDate;
+    }
+
+    @Override
+    public String toString() {
+        return "DrawAwardVO{" +
+                "awardId='" + awardId + '\'' +
+                ", awardType=" + awardType +
+                ", awardName='" + awardName + '\'' +
+                ", awardContent='" + awardContent + '\'' +
+                ", strategyMode=" + strategyMode +
+                ", grantType=" + grantType +
+                ", grantDate=" + grantDate +
+                '}';
     }
 }

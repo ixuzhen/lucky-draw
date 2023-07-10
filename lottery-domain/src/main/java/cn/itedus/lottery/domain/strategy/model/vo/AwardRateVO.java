@@ -9,7 +9,7 @@ import java.math.BigDecimal;
  * @github: https://github.com/fuzhengwei
  * @Copyright: 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
  */
-public class AwardRateInfo {
+public class AwardRateVO {
 
     /**
      * 奖品ID
@@ -21,10 +21,10 @@ public class AwardRateInfo {
      */
     private BigDecimal awardRate;
 
-    public AwardRateInfo() {
+    public AwardRateVO() {
     }
 
-    public AwardRateInfo(String awardId, BigDecimal awardRate) {
+    public AwardRateVO(String awardId, BigDecimal awardRate) {
         this.awardId = awardId;
         this.awardRate = awardRate;
     }
@@ -43,5 +43,13 @@ public class AwardRateInfo {
 
     public void setAwardRate(BigDecimal awardRate) {
         this.awardRate = awardRate;
+    }
+
+    @Override
+    public String toString() {
+        return "AwardRateVO{" +
+                "awardId='" + awardId + '\'' +
+                ", awardRate=" + awardRate +
+                '}';
     }
 }

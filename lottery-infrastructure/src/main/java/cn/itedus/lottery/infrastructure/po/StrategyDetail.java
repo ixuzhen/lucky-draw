@@ -57,6 +57,16 @@ public class StrategyDetail {
      */
     private String updateTime;
 
+    private Integer lockCount;
+
+    public Integer getLockCount() {
+        return lockCount;
+    }
+
+    public void setLockCount(Integer lockCount) {
+        this.lockCount = lockCount;
+    }
+
     public String getId() {
         return id;
     }

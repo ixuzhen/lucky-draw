@@ -12,6 +12,7 @@
         <result column="award_rate" property="awardRate"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
+        <result column="lock_count" property="lockCount"/>
     </resultMap>
 
     <insert id="insertList" parameterType="java.util.List">

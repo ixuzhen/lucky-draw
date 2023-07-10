@@ -1,37 +1,22 @@
-package cn.itedus.lottery.domain.rule.model.req;
+package cn.itedus.lottery.rpc.req;
 
 import java.util.Map;
 
 /**
- * @description: 决策物料
+ * @description: 量化人群抽奖请求参数
  * @author: 小傅哥，微信：fustack
- * @date: 2021/10/8
+ * @date: 2021/10/16
  * @github: https://github.com/fuzhengwei
  * @Copyright: 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
  */
-public class DecisionMatterReq {
+public class QuantificationDrawReq {
 
-    /**
-     * 规则树ID
-     */
+    /** 用户ID */
+    private String uId;
+    /** 规则树ID */
     private Long treeId;
-    /**
-     * 用户ID
-     */
-    private String userId;
-    /**
-     * 决策值
-     */
+    /** 决策值 */
     private Map<String, Object> valMap;
-
-    public DecisionMatterReq() {
-    }
-
-    public DecisionMatterReq(String userId, Long treeId, Map<String, Object> valMap) {
-        this.userId = userId;
-        this.treeId = treeId;
-        this.valMap = valMap;
-    }
 
     public Long getTreeId() {
         return treeId;
@@ -41,12 +26,12 @@ public class DecisionMatterReq {
         this.treeId = treeId;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getuId() {
+        return uId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setuId(String uId) {
+        this.uId = uId;
     }
 
     public Map<String, Object> getValMap() {

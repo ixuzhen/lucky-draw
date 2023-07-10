@@ -7,7 +7,7 @@ import cn.itedus.lottery.domain.award.service.factory.DistributionGoodsFactory;
 import cn.itedus.lottery.domain.award.service.goods.IDistributionGoods;
 import cn.itedus.lottery.domain.strategy.model.req.DrawReq;
 import cn.itedus.lottery.domain.strategy.model.res.DrawResult;
-import cn.itedus.lottery.domain.strategy.model.vo.DrawAwardInfo;
+import cn.itedus.lottery.domain.strategy.model.vo.DrawAwardVO;
 import cn.itedus.lottery.domain.strategy.service.draw.IDrawExec;
 import cn.itedus.lottery.infrastructure.dao.IActivityDao;
 import cn.itedus.lottery.infrastructure.po.Activity;
@@ -23,9 +23,11 @@ import javax.annotation.Resource;
 import java.util.Date;
 
 /**
- * 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
- * 公众号：bugstack虫洞栈
- * Create by 小傅哥(fustack)
+ * @description: SpringBoot 单元测试
+ * @author: 小傅哥，微信：fustack
+ * @date: 2021/9/4
+ * @github: https://github.com/fuzhengwei
+ * @Copyright: 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -50,6 +52,7 @@ public class SpringRunnerTest {
         drawExec.doDrawExec(new DrawReq("八杯水", 10001L));
     }
 
+
     @Test
     public void test_award() {
         // 执行抽奖
@@ -63,7 +66,7 @@ public class SpringRunnerTest {
         }
 
         // 封装发奖参数，orderId：2109313442431 为模拟ID，需要在用户参与领奖活动时生成
-        DrawAwardInfo drawAwardInfo = drawResult.getDrawAwardInfo();
+        DrawAwardVO drawAwardInfo = drawResult.getDrawAwardInfo();
         GoodsReq goodsReq = new GoodsReq(drawResult.getuId(), "2109313442431", drawAwardInfo.getAwardId(), drawAwardInfo.getAwardName(), drawAwardInfo.getAwardContent());
 
         // 根据 awardType 从抽奖工厂中获取对应的发奖服务
@@ -72,7 +75,6 @@ public class SpringRunnerTest {
 
         logger.info("测试结果：{}", JSON.toJSONString(distributionRes));
     }
-
     @Test
     public void test_insert() {
         Activity activity = new Activity();

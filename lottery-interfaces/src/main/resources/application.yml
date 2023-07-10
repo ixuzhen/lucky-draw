@@ -44,3 +44,14 @@ dubbo:
     port: 20880
   scan:
     base-packages: cn.itedus.lottery.rpc
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  application:
+    name: lottery
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    virtual-host: /
