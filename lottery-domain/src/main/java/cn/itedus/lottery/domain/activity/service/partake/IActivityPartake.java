@@ -28,4 +28,6 @@ public interface IActivityPartake {
      */
     Result recordDrawOrder(DrawOrderVO drawOrder);
 
+    //Result recordDrawOrderReturn(DrawOrderVO drawOrder);
+
 }

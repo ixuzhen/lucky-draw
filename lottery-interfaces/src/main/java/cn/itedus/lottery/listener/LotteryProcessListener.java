@@ -21,16 +21,21 @@ public class LotteryProcessListener {
 
 
 
-    @RabbitHandler
-    public void handleStockLockedRelease(StockLockedTo to, Message message, Channel channel) throws IOException {
-
-        try {
-
-            // 手动删除消息
-            channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
-        } catch (Exception e) {
-            // 解锁失败 将消息重新放回队列，让别人消费
-            channel.basicReject(message.getMessageProperties().getDeliveryTag(),true);
-        }
-    }
+    //@RabbitHandler
+    //public void handleStockLockedRelease(StockLockedTo to, Message message, Channel channel) throws IOException {
+    //
+    //    try {
+    //        // 查看当前订单的状态
+    //
+    //            // 如果是已经提交了信息，执行发货操作
+    //
+    //            // 如果用户没有领取，就恢复库存
+    //
+    //        // 手动删除消息
+    //        channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
+    //    } catch (Exception e) {
+    //        // 解锁失败 将消息重新放回队列，让别人消费
+    //        channel.basicReject(message.getMessageProperties().getDeliveryTag(),true);
+    //    }
+    //}
 }
