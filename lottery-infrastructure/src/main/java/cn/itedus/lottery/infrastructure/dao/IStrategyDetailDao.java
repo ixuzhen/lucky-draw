@@ -36,6 +36,12 @@ public interface IStrategyDetailDao {
      */
     int deductStock(StrategyDetail strategyDetailReq);
 
+
+    /**
+     * 锁定库存
+     */
+    int lockStock(StrategyDetail strategyDetailReq);
+
     /**
      * 插入策略配置组
      *

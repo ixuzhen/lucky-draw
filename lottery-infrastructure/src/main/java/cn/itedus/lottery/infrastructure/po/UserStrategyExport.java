@@ -1,5 +1,7 @@
 package cn.itedus.lottery.infrastructure.po;
 
+import lombok.Data;
+
 import java.util.Date;
 
 /**
@@ -9,6 +11,7 @@ import java.util.Date;
  * @github: https://github.com/fuzhengwei
  * @Copyright: 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
  */
+@Data
 public class UserStrategyExport {
 
     /** 自增ID */
@@ -43,132 +46,17 @@ public class UserStrategyExport {
     private Date createTime;
     /** 更新时间 */
     private Date updateTime;
+    /** mq的状态 */
+    private Integer mqState;
+    /** 0:未领取、1:已领取、2:已过期（需要返还库存） */
+    private Integer claimState;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getuId() {
-        return uId;
-    }
 
     public void setuId(String uId) {
         this.uId = uId;
     }
 
-    public Long getActivityId() {
-        return activityId;
-    }
-
-    public void setActivityId(Long activityId) {
-        this.activityId = activityId;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public Long getStrategyId() {
-        return strategyId;
-    }
-
-    public void setStrategyId(Long strategyId) {
-        this.strategyId = strategyId;
-    }
-
-    public Integer getStrategyMode() {
-        return strategyMode;
-    }
-
-    public void setStrategyMode(Integer strategyMode) {
-        this.strategyMode = strategyMode;
-    }
-
-    public Integer getGrantType() {
-        return grantType;
-    }
-
-    public void setGrantType(Integer grantType) {
-        this.grantType = grantType;
-    }
-
-    public Date getGrantDate() {
-        return grantDate;
-    }
-
-    public void setGrantDate(Date grantDate) {
-        this.grantDate = grantDate;
-    }
-
-    public Integer getGrantState() {
-        return grantState;
-    }
-
-    public void setGrantState(Integer grantState) {
-        this.grantState = grantState;
-    }
-
-    public String getAwardId() {
-        return awardId;
-    }
-
-    public void setAwardId(String awardId) {
-        this.awardId = awardId;
-    }
-
-    public Integer getAwardType() {
-        return awardType;
-    }
-
-    public void setAwardType(Integer awardType) {
-        this.awardType = awardType;
-    }
-
-    public String getAwardName() {
-        return awardName;
-    }
-
-    public void setAwardName(String awardName) {
-        this.awardName = awardName;
-    }
-
-    public String getAwardContent() {
-        return awardContent;
-    }
-
-    public void setAwardContent(String awardContent) {
-        this.awardContent = awardContent;
-    }
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public String getuId() {
+        return uId;
     }
 }

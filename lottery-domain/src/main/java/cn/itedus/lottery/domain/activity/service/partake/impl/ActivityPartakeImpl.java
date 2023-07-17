@@ -10,6 +10,7 @@ import cn.itedus.lottery.domain.activity.model.vo.UserTakeActivityVO;
 import cn.itedus.lottery.domain.activity.repository.IUserTakeActivityRepository;
 import cn.itedus.lottery.domain.activity.service.partake.BaseActivityPartake;
 import cn.itedus.lottery.domain.support.ids.IIdGenerator;
+import cn.itedus.lottery.infrastructure.po.UserStrategyExport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DuplicateKeyException;
@@ -127,7 +128,7 @@ public class ActivityPartakeImpl extends BaseActivityPartake {
                     }
 
                     // 保存抽奖信息
-                    userTakeActivityRepository.saveUserStrategyExport(drawOrder);
+                    UserStrategyExport userStrategyExport = userTakeActivityRepository.saveUserStrategyExport(drawOrder);
                 } catch (DuplicateKeyException e) {
                     status.setRollbackOnly();
                     logger.error("记录中奖单，唯一索引冲突 activityId：{} uId：{}", drawOrder.getActivityId(), drawOrder.getuId(), e);

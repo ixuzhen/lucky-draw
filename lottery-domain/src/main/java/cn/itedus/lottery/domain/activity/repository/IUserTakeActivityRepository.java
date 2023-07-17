@@ -2,6 +2,8 @@ package cn.itedus.lottery.domain.activity.repository;
 
 import cn.itedus.lottery.domain.activity.model.vo.DrawOrderVO;
 import cn.itedus.lottery.domain.activity.model.vo.UserTakeActivityVO;
+import cn.itedus.lottery.infrastructure.po.UserStrategyExport;
+
 
 import java.util.Date;
 
@@ -55,8 +57,9 @@ public interface IUserTakeActivityRepository {
      * 保存抽奖信息
      *
      * @param drawOrder 中奖单
+     * @return
      */
-    void saveUserStrategyExport(DrawOrderVO drawOrder);
+    UserStrategyExport saveUserStrategyExport(DrawOrderVO drawOrder);
 
     /**
      * 查询是否存在未执行抽奖领取活动单【user_take_activity 存在 state = 0，领取了但抽奖过程失败的，可以直接返回领取结果继续抽奖】

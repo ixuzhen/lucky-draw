@@ -34,6 +34,7 @@ public abstract class AbstractDrawBase extends DrawStrategySupport implements ID
         // 3. 获取不在抽奖范围内的列表，包括：奖品库存为空、风控策略、临时调整等
         List<String> excludeAwardIds = this.queryExcludeAwardIds(req.getStrategyId());
 
+
         // 4. 执行抽奖算法
         String awardId = this.drawAlgorithm(req.getStrategyId(), drawAlgorithmGroup.get(strategy.getStrategyMode()), excludeAwardIds);
 

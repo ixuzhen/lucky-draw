@@ -27,4 +27,6 @@ public interface IStrategyRepository {
      */
     boolean deductStock(Long strategyId, String awardId);
 
+    boolean lockStock(Long strategyId, String awardId);
+
 }

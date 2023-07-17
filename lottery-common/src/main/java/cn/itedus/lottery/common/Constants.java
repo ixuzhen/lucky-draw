@@ -330,10 +330,51 @@ public class Constants {
         RandomNumeric;
     }
 
+    public enum ClaimState {
+        /**
+         * 未领取
+         */
+        UNCLAIMED(0, "未领取"),
+        /**
+         * 已领取
+         */
+        CLAIMED(1, "已领取"),
+        /**
+         * 超时未领取
+         */
+        TIMEOUT(2, "超时未领取");
+
+
+        private Integer code;
+        private String info;
+
+        ClaimState(Integer code, String info) {
+            this.code = code;
+            this.info = info;
+        }
+
+        public Integer getCode() {
+            return code;
+        }
+
+        public void setCode(Integer code) {
+            this.code = code;
+        }
+
+        public String getInfo() {
+            return info;
+        }
+
+        public void setInfo(String info) {
+            this.info = info;
+        }
+    }
+
     /**
      * 活动单使用状态 0未使用、1已使用
      */
     public enum TaskState {
+
 
         NO_USED(0, "未使用"),
         USED(1, "已使用");

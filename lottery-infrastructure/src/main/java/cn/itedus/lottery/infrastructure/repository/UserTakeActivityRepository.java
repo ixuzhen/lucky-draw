@@ -83,7 +83,7 @@ public class UserTakeActivityRepository implements IUserTakeActivityRepository {
     }
 
     @Override
-    public void saveUserStrategyExport(DrawOrderVO drawOrder) {
+    public UserStrategyExport saveUserStrategyExport(DrawOrderVO drawOrder) {
         UserStrategyExport userStrategyExport = new UserStrategyExport();
         userStrategyExport.setuId(drawOrder.getuId());
         userStrategyExport.setActivityId(drawOrder.getActivityId());
@@ -98,8 +98,10 @@ public class UserTakeActivityRepository implements IUserTakeActivityRepository {
         userStrategyExport.setAwardName(drawOrder.getAwardName());
         userStrategyExport.setAwardContent(drawOrder.getAwardContent());
         userStrategyExport.setUuid(String.valueOf(drawOrder.getOrderId()));
+        userStrategyExport.setClaimState(Constants.ClaimState.UNCLAIMED.getCode());
 
         userStrategyExportDao.insert(userStrategyExport);
+        return userStrategyExport;
     }
 
     @Override
