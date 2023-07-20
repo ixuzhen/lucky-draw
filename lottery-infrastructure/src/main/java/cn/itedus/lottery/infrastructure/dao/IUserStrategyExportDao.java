@@ -2,8 +2,11 @@ package cn.itedus.lottery.infrastructure.dao;
 
 import cn.bugstack.middleware.db.router.annotation.DBRouter;
 import cn.bugstack.middleware.db.router.annotation.DBRouterStrategy;
-import cn.itedus.lottery.infrastructure.po.UserStrategyExport;
+import cn.itedus.lottery.po.UserStrategyExport;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Map;
 
 /**
  * @description: 用户策略计算结果表DAO
@@ -30,5 +33,9 @@ public interface IUserStrategyExportDao {
      */
     @DBRouter
     UserStrategyExport queryUserStrategyExportByUId(String uId);
+
+    @DBRouter
+    UserStrategyExport queryUserStrategyExportById(UserStrategyExport userStrategyExport);
+//    UserStrategyExport queryUserStrategyExportById(@Param("uId") String uId,@Param("id") Integer id);
 
 }

@@ -55,3 +55,14 @@ spring:
     host: 192.168.192.149
     port: 5672
     virtual-host: /
+    # 开启发送端确认,即消息到达mq服务器就会执行回调函数
+    publisher-confirm-type: correlated
+    # 开启发送端返回,即消息到达队列就会执行回调函数
+    publisher-returns: true
+    template:
+      # 只要抵达队列，以异步的方式发送，优先回调我们的这个returnconfirm
+      mandatory: true
+    listener:
+      simple:
+        # 消费端手动ack消息
+        acknowledge-mode: manual

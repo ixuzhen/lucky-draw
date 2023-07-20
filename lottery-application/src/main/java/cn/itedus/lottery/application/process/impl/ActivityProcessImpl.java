@@ -18,11 +18,15 @@ import cn.itedus.lottery.domain.strategy.model.res.DrawResult;
 import cn.itedus.lottery.domain.strategy.model.vo.DrawAwardVO;
 import cn.itedus.lottery.domain.strategy.service.draw.IDrawExec;
 import cn.itedus.lottery.domain.support.ids.IIdGenerator;
+import cn.itedus.lottery.po.UserStrategyExport;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
 
 /**
  * @description: 活动抽奖流程编排
@@ -43,8 +47,13 @@ public class ActivityProcessImpl implements IActivityProcess {
     @Resource(name = "ruleEngineHandle")
     private EngineFilter engineFilter;
 
+    @Autowired
+    RabbitTemplate rabbitTemplate;
+
     @Resource
     private Map<Constants.Ids, IIdGenerator> idGeneratorMap;
+
+
 
     @Override
     public DrawProcessResult doDrawProcess(DrawProcessReq req) {
@@ -63,10 +72,24 @@ public class ActivityProcessImpl implements IActivityProcess {
         }
         DrawAwardVO drawAwardVO = drawResult.getDrawAwardInfo();
 
-        // 3. 结果落库
-        activityPartake.recordDrawOrder(buildDrawOrderVO(req, strategyId, takeId, drawAwardVO));
+        // 3. 结果落库，UserStrategyExport就是存放用户参与活动的记录表，包含用户ID、活动ID、策略ID、领取ID、抽奖ID、抽奖结果，领取状态等信息
+        UserStrategyExport userStrategyExport = activityPartake.recordDrawOrder(buildDrawOrderVO(req, strategyId, takeId, drawAwardVO));
 
-        // 4. 发送MQ，触发发奖流程
+        try {
+            // TODO: 保证消息一定要发送出去，每个消息都可以做好一个日志记录，把消息放数据库中，
+            //  TODO: 然后定时任务去扫描，如果发现消息没有发送成功，就重新发送
+            // 4. 发送MQ，触发发奖流程
+            rabbitTemplate.convertAndSend(
+                    "lottery-event-exchange",
+                    "lottery.succeed.delay",
+                    userStrategyExport
+            );
+        } catch (Exception e) {
+            // TODO: 重试发几次
+//            while
+        }
+
+
 
         // 5. 返回结果
         return new DrawProcessResult(Constants.ResponseCode.SUCCESS.getCode(), Constants.ResponseCode.SUCCESS.getInfo(), drawAwardVO);

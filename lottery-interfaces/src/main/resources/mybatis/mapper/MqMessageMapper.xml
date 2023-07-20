@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.itedus.lottery.infrastructure.dao.IMqMessageDao">
+    <resultMap id="mqMessageMap" type="cn.itedus.lottery.po.MqMessage">
+            <id column="message_id" property="messageId"/>
+<!--            <result column="message_id" property="messageId"/>-->
+            <result column="content" property="content"/>
+        <result column="class_type" property="classType"/>
+        <result column="to_exchange" property="toExchange"/>
+        <result column="routing_key" property="routingKey"/>
+        <result column="message_state" property="messageState"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="fail_count" property="failCount"/>
+
+    </resultMap>
+    <insert id="insert" parameterType="cn.itedus.lottery.po.MqMessage">
+        insert into mq_message(message_id, content, class_type, to_exchange, routing_key,
+                               message_state, create_time, update_time, fail_count)
+        values(#{messageId}, #{content}, #{classType}, #{toExchange}, #{routingKey},
+               #{messageState}, Now(), Now(), #{failCount})
+
+    </insert>
+    <update id="updateState" parameterType="cn.itedus.lottery.po.MqMessage">
+        UPDATE mq_message SET message_state = #{messageState}, update_time = Now()
+        WHERE message_id = #{messageId}
+    </update>
+
+
+</mapper>

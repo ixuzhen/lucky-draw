@@ -1,10 +1,14 @@
 package cn.itedus.lottery.test.dao;
 
+import cn.bugstack.middleware.db.router.test.TestDBRoute;
 import cn.itedus.lottery.common.Constants;
 import cn.itedus.lottery.domain.support.ids.IIdGenerator;
 import cn.itedus.lottery.infrastructure.dao.IUserStrategyExportDao;
-import cn.itedus.lottery.infrastructure.po.UserStrategyExport;
+import cn.itedus.lottery.po.UserStrategyExport;
 import com.alibaba.fastjson.JSON;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import org.apache.commons.collections.map.HashedMap;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -57,8 +61,19 @@ public class UserStrategyExportDaoTest {
 
     @Test
     public void test_select() {
-        UserStrategyExport userStrategyExport = userStrategyExportDao.queryUserStrategyExportByUId("Uhdgkw766120d");
+        UserStrategyExport userStrategyExport = userStrategyExportDao.queryUserStrategyExportByUId("xiaofuge");
         logger.info("测试结果：{}", JSON.toJSONString(userStrategyExport));
     }
+
+    @Test
+    public void test_select_by_id() {
+        UserStrategyExport userStrategyExport1 = new UserStrategyExport();
+        userStrategyExport1.setuId("xiaofuge");
+        userStrategyExport1.setId((long) 19);
+        UserStrategyExport userStrategyExport = userStrategyExportDao.queryUserStrategyExportById(userStrategyExport1);
+//        UserStrategyExport userStrategyExport = userStrategyExportDao.queryUserStrategyExportById("xiaofuge",19);
+        logger.info("测试结果：{}", JSON.toJSONString(userStrategyExport));
+    }
+
 
 }

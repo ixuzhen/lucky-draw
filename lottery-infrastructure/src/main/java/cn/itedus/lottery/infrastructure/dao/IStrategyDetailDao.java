@@ -43,6 +43,11 @@ public interface IStrategyDetailDao {
     int lockStock(StrategyDetail strategyDetailReq);
 
     /**
+     * 释放一个库存
+     */
+    int releaseStock(StrategyDetail strategyDetailReq);
+
+    /**
      * 插入策略配置组
      *
      * @param list 策略配置组

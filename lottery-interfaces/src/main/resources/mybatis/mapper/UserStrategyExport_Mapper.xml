@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.itedus.lottery.infrastructure.dao.IUserStrategyExportDao">
 
-    <resultMap id="userStrategyExportMap" type="cn.itedus.lottery.infrastructure.po.UserStrategyExport">
+    <resultMap id="userStrategyExportMap" type="cn.itedus.lottery.po.UserStrategyExport">
         <id column="id" property="id"/>
         <result column="u_id" property="uId"/>
         <result column="activity_id" property="activityId"/>
@@ -23,7 +23,7 @@
         <result column="claim_state" property="claimState"/>
     </resultMap>
 
-    <insert id="insert" parameterType="cn.itedus.lottery.infrastructure.po.UserStrategyExport"
+    <insert id="insert" parameterType="cn.itedus.lottery.po.UserStrategyExport"
             useGeneratedKeys="true" keyProperty="id">
         INSERT INTO user_strategy_export
         (u_id, activity_id, order_id, strategy_id, strategy_mode,
@@ -41,6 +41,15 @@
                award_name, award_content, uuid, create_time, update_time, mq_state, claim_state
         FROM user_strategy_export
         WHERE u_id = #{uId}
+    </select>
+
+
+    <select id="queryUserStrategyExportById" parameterType="cn.itedus.lottery.po.UserStrategyExport" resultMap="userStrategyExportMap">
+        SELECT id, u_id, activity_id, order_id, strategy_id, strategy_mode,
+               grant_type, grant_date, grant_state, award_id, award_type,
+               award_name, award_content, uuid, create_time, update_time, mq_state, claim_state
+        FROM user_strategy_export
+        WHERE id = #{id}
     </select>
 
 </mapper>

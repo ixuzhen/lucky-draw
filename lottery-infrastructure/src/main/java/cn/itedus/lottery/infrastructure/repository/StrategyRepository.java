@@ -92,4 +92,14 @@ public class StrategyRepository implements IStrategyRepository {
         return count == 1;
     }
 
+    @Override
+    public boolean releaseStock(Long strategyId, String awardId) {
+        StrategyDetail req = new StrategyDetail();
+        req.setStrategyId(strategyId);
+        req.setAwardId(awardId);
+        int count = strategyDetailDao.releaseStock(req);
+        return count == 1;
+    }
+
+
 }

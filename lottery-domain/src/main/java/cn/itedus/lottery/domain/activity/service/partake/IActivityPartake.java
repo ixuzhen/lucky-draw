@@ -4,6 +4,8 @@ import cn.itedus.lottery.common.Result;
 import cn.itedus.lottery.domain.activity.model.req.PartakeReq;
 import cn.itedus.lottery.domain.activity.model.res.PartakeResult;
 import cn.itedus.lottery.domain.activity.model.vo.DrawOrderVO;
+import cn.itedus.lottery.po.UserStrategyExport;
+
 
 /**
  * @description: 抽奖活动参与接口
@@ -26,7 +28,8 @@ public interface IActivityPartake {
      * @param drawOrder 奖品单
      * @return          保存结果
      */
-    Result recordDrawOrder(DrawOrderVO drawOrder);
+    UserStrategyExport recordDrawOrder(DrawOrderVO drawOrder);
+//    Result recordDrawOrder(DrawOrderVO drawOrder);
 
     //Result recordDrawOrderReturn(DrawOrderVO drawOrder);
 

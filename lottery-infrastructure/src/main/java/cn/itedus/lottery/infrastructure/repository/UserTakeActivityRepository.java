@@ -7,7 +7,7 @@ import cn.itedus.lottery.domain.activity.repository.IUserTakeActivityRepository;
 import cn.itedus.lottery.infrastructure.dao.IUserStrategyExportDao;
 import cn.itedus.lottery.infrastructure.dao.IUserTakeActivityCountDao;
 import cn.itedus.lottery.infrastructure.dao.IUserTakeActivityDao;
-import cn.itedus.lottery.infrastructure.po.UserStrategyExport;
+import cn.itedus.lottery.po.UserStrategyExport;
 import cn.itedus.lottery.infrastructure.po.UserTakeActivity;
 import cn.itedus.lottery.infrastructure.po.UserTakeActivityCount;
 import org.springframework.stereotype.Component;

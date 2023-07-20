@@ -2,7 +2,7 @@ package cn.itedus.lottery.domain.activity.repository;
 
 import cn.itedus.lottery.domain.activity.model.vo.DrawOrderVO;
 import cn.itedus.lottery.domain.activity.model.vo.UserTakeActivityVO;
-import cn.itedus.lottery.infrastructure.po.UserStrategyExport;
+import cn.itedus.lottery.po.UserStrategyExport;
 
 
 import java.util.Date;

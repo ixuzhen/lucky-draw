@@ -48,7 +48,7 @@ public class MyRabbitMQConfig {
         HashMap<String, Object> arguments = new HashMap<>();
         arguments.put("x-dead-letter-exchange", "lottery-event-exchange");  // 死信路由
         arguments.put("x-dead-letter-routing-key", "lottery.process");  // routing-key
-        arguments.put("x-message-ttl", 7000); // 消息过期时间 7秒
+        arguments.put("x-message-ttl", 10000); // 消息过期时间 10秒
         Queue queue = new Queue("lottery.succeed.delay.queue", true, false, false, arguments);
         return queue;
     }

@@ -140,6 +140,29 @@ public class Constants {
      * 单项概率：如果A奖品抽空后，B和C保持目前中奖概率，用户抽奖扔有20%中为A，因A库存抽空则结果展示为未中奖。为了运营成本，通常这种情况的使用的比较多
      * 总体概率：如果A奖品抽空后，B和C奖品的概率按照 3:5 均分，相当于B奖品中奖概率由 0.3 升为 0.375
      */
+    // 消息状态：   0-新建,1-已发送,2-错误抵达,3-已抵达
+    public enum messageState {
+        NEW(0, "新建"),
+        SEND(1, "已发送"),
+        ERROR(2, "错误抵达"),
+        ARRIVE(3, "已抵达");
+
+        private Integer code;
+        private String info;
+
+        messageState(Integer code, String info) {
+            this.code = code;
+            this.info = info;
+        }
+
+        public Integer getCode() {
+            return code;
+        }
+
+        public String getInfo() {
+            return info;
+        }
+    }
     public enum StrategyMode {
 
         /**

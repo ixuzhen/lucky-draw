@@ -56,4 +56,8 @@
         WHERE strategy_id = #{strategyId} AND award_id = #{awardId} AND award_count > lock_count
     </update>
 
+    <update id="releaseStock" parameterType="cn.itedus.lottery.infrastructure.po.StrategyDetail">
+        UPDATE strategy_detail SET  lock_count = lock_count - 1
+        WHERE strategy_id = #{strategyId} AND award_id = #{awardId} AND lock_count > 0
+    </update>
 </mapper>
