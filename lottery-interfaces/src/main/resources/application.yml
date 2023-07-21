@@ -60,8 +60,8 @@ spring:
     # 开启发送端返回,即消息到达队列就会执行回调函数
     publisher-returns: true
     template:
-      # 只要抵达队列，以异步的方式发送，优先回调我们的这个returnconfirm
       mandatory: true
+    # 只要抵达队列，以异步的方式发送，优先回调我们的这个returnconfirm
     listener:
       simple:
         # 消费端手动ack消息

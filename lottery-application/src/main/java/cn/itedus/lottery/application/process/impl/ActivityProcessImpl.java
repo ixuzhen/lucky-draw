@@ -1,5 +1,7 @@
 package cn.itedus.lottery.application.process.impl;
 
+import cn.hutool.core.util.IdUtil;
+import cn.hutool.json.JSONUtil;
 import cn.itedus.lottery.application.process.IActivityProcess;
 import cn.itedus.lottery.application.process.req.DrawProcessReq;
 import cn.itedus.lottery.application.process.res.DrawProcessResult;
@@ -18,7 +20,11 @@ import cn.itedus.lottery.domain.strategy.model.res.DrawResult;
 import cn.itedus.lottery.domain.strategy.model.vo.DrawAwardVO;
 import cn.itedus.lottery.domain.strategy.service.draw.IDrawExec;
 import cn.itedus.lottery.domain.support.ids.IIdGenerator;
+import cn.itedus.lottery.infrastructure.dao.IMqMessageDao;
+import cn.itedus.lottery.po.MqMessage;
 import cn.itedus.lottery.po.UserStrategyExport;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +32,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
 
 
 /**
@@ -36,6 +43,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Copyright: 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
  */
 @Service
+@Slf4j
 public class ActivityProcessImpl implements IActivityProcess {
 
     @Resource
@@ -52,6 +60,9 @@ public class ActivityProcessImpl implements IActivityProcess {
 
     @Resource
     private Map<Constants.Ids, IIdGenerator> idGeneratorMap;
+
+    @Autowired
+    private IMqMessageDao mqMessageDao;
 
 
 
@@ -72,22 +83,44 @@ public class ActivityProcessImpl implements IActivityProcess {
         }
         DrawAwardVO drawAwardVO = drawResult.getDrawAwardInfo();
 
+        String messageId = IdUtil.simpleUUID();
         // 3. 结果落库，UserStrategyExport就是存放用户参与活动的记录表，包含用户ID、活动ID、策略ID、领取ID、抽奖ID、抽奖结果，领取状态等信息
-        UserStrategyExport userStrategyExport = activityPartake.recordDrawOrder(buildDrawOrderVO(req, strategyId, takeId, drawAwardVO));
+        UserStrategyExport userStrategyExport = activityPartake.recordDrawOrder(buildDrawOrderVO(req, strategyId, takeId, drawAwardVO, messageId));
+
+        // TODO: 保证消息一定要发送出去，每个消息都可以做好一个日志记录，把消息放数据库中，
+
+        String userStrategyExportJson = JSONUtil.toJsonStr(userStrategyExport);
+        String className = UserStrategyExport.class.getName();
+        MqMessage mqMessage = new MqMessage();
+        mqMessage.setMessageId(messageId);
+        mqMessage.setContent(userStrategyExportJson);
+        mqMessage.setMessageState(Constants.messageState.NEW.getCode());
+        mqMessage.setClassType(className);
+        mqMessage.setFailCount(0);
+        mqMessage.setToExchange("lottery-event-exchange");
+        mqMessage.setRoutingKey("lottery.succeed.delay");
+        mqMessageDao.insert(mqMessage);
 
         try {
-            // TODO: 保证消息一定要发送出去，每个消息都可以做好一个日志记录，把消息放数据库中，
+
+            log.error("将存放数据库，消息：{}", mqMessage);
             //  TODO: 然后定时任务去扫描，如果发现消息没有发送成功，就重新发送
             // 4. 发送MQ，触发发奖流程
+
             rabbitTemplate.convertAndSend(
                     "lottery-event-exchange",
                     "lottery.succeed.delay",
-                    userStrategyExport
+                    userStrategyExport,
+                    new CorrelationData(messageId)
             );
         } catch (Exception e) {
             // TODO: 重试发几次
 //            while
+            log.error("",e);
+            e.printStackTrace();
+
         }
+
 
 
 
@@ -111,7 +144,7 @@ public class ActivityProcessImpl implements IActivityProcess {
         return ruleQuantificationCrowdResult;
     }
 
-    private DrawOrderVO buildDrawOrderVO(DrawProcessReq req, Long strategyId, Long takeId, DrawAwardVO drawAwardVO) {
+    private DrawOrderVO buildDrawOrderVO(DrawProcessReq req, Long strategyId, Long takeId, DrawAwardVO drawAwardVO, String messageId) {
         long orderId = idGeneratorMap.get(Constants.Ids.SnowFlake).nextId();
         DrawOrderVO drawOrderVO = new DrawOrderVO();
         drawOrderVO.setuId(req.getuId());
@@ -127,6 +160,7 @@ public class ActivityProcessImpl implements IActivityProcess {
         drawOrderVO.setAwardType(drawAwardVO.getAwardType());
         drawOrderVO.setAwardName(drawAwardVO.getAwardName());
         drawOrderVO.setAwardContent(drawAwardVO.getAwardContent());
+        drawOrderVO.setMessageId(messageId);
         return drawOrderVO;
     }
 
