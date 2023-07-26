@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -34,9 +35,9 @@ public class MqMessage implements Serializable {
 //    0-新建,1-已发送,2-错误抵达,3-已抵达
     private Integer messageState;
 
-    private LocalDateTime createTime;
+    private Date createTime;
 
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
     private Integer failCount;
 

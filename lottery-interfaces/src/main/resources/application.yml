@@ -1,6 +1,15 @@
 server:
   port: 8080
 
+lottery:
+  # 定时任务参数
+  worker:
+    rabbitMQ:
+      # 逗号分隔
+      databases: 1,2
+
+
+
 # 多数据源路由配置
 mini-db-router:
   jdbc:

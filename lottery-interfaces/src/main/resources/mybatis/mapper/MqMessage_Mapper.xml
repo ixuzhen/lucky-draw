@@ -27,5 +27,13 @@
         WHERE message_id = #{messageId}
     </update>
 
+<!--    查询message_state字段为0，1，2，4的行-->
+    <select id="queryFailMessages" resultMap="mqMessageMap">
+        SELECT message_id, content, class_type, to_exchange, routing_key,
+               message_state, create_time, update_time, fail_count, u_id
+        FROM mq_message
+        WHERE message_state IN (2, 4) or (message_state = 0 and Now() - update_time > 1800000)
+    </select>
+
 
 </mapper>

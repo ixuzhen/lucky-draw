@@ -103,7 +103,7 @@ public class ActivityProcessImpl implements IActivityProcess {
 
         try {
 
-            log.error("将存放数据库，消息：{}", mqMessage);
+//            log.error("将存放数据库，消息：{}", mqMessage);
             //  TODO: 然后定时任务去扫描，如果发现消息没有发送成功，就重新发送
             // 4. 发送MQ，触发发奖流程
 
