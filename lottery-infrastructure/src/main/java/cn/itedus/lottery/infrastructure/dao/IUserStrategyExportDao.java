@@ -38,4 +38,9 @@ public interface IUserStrategyExportDao {
     UserStrategyExport queryUserStrategyExportById(UserStrategyExport userStrategyExport);
 //    UserStrategyExport queryUserStrategyExportById(@Param("uId") String uId,@Param("id") Integer id);
 
+
+    @DBRouter
+    int updateClaimState(UserStrategyExport userStrategyExport);
+
+
 }

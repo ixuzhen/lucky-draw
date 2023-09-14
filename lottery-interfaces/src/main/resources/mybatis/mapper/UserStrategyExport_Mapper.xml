@@ -35,6 +35,12 @@
          #{awardName},#{awardContent},#{uuid},now(),now(),#{mqId},#{claimState})
     </insert>
 
+    <update id="updateClaimState" parameterType="cn.itedus.lottery.po.UserStrategyExport">
+        UPDATE user_strategy_export
+        SET claim_state = #{claimState}, update_time = now()
+        WHERE id = #{id}
+    </update>
+
     <select id="queryUserStrategyExportByUId" parameterType="java.lang.String" resultMap="userStrategyExportMap">
         SELECT id, u_id, activity_id, order_id, strategy_id, strategy_mode,
                grant_type, grant_date, grant_state, award_id, award_type,

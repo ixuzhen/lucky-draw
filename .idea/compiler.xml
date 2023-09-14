@@ -7,12 +7,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="lottery-application" />
-        <module name="lottery-rpc" />
         <module name="lottery-infrastructure" />
-        <module name="lottery-interfaces" />
         <module name="lottery-common" />
         <module name="lottery-domain" />
+        <module name="lottery-application" />
+        <module name="lottery-rpc" />
+        <module name="lottery-seckill" />
+        <module name="lottery-interfaces" />
       </profile>
     </annotationProcessing>
   </component>
@@ -26,6 +27,7 @@
       <module name="lottery-infrastructure" options="-parameters" />
       <module name="lottery-interfaces" options="-parameters" />
       <module name="lottery-rpc" options="-parameters" />
+      <module name="lottery-seckill" options="-parameters" />
       <module name="lucky-draw" options="" />
     </option>
   </component>

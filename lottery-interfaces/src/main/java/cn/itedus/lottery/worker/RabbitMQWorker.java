@@ -51,7 +51,8 @@ public class RabbitMQWorker {
             for (UserStrategyExport userStrategyExport : userStrategyExports) {
                 log.error("重新发送mq消息，消息内容：{}", userStrategyExport);
                 mqMessageRepository.updateState(userStrategyExport, Constants.messageState.NEW.getCode());
-                rabbitTemplate.convertAndSend(
+                rabbitTemplate.
+                        convertAndSend(
                         "lottery-event-exchange",
                         "lottery.succeed.delay",
                         userStrategyExport,

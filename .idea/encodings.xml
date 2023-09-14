@@ -13,7 +13,9 @@
     <file url="file://$PROJECT_DIR$/lottery-interfaces/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/lottery-rpc/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/lottery-rpc/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lottery-seckill/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://E:/maven/maven-repository/org/springframework/boot/spring-boot-starter-parent/2.3.5.RELEASE/src/main/resources" charset="UTF-8" />
   </component>
 </project>

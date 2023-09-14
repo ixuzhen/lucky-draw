@@ -1,10 +1,11 @@
-package cn.itedus.lottery;
+package cn.itedus.lottery.seckill;
 
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 
@@ -15,10 +16,11 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableRabbit
 // 启用定时任务功能
 @EnableScheduling
-public class LotteryApplication {
+@EnableFeignClients
+public class SeckillApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(LotteryApplication.class, args);
+        SpringApplication.run(SeckillApplication.class, args);
     }
 
 }

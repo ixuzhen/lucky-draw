@@ -1,0 +1,34 @@
+server:
+  port: 8081
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.192.149:8848
+  application:
+    name: seckill
+  redis:
+    host: 192.168.192.149
+    port: 6379
+  rabbitmq:
+    host: 192.168.192.149
+    port: 5672
+    virtual-host: /
+    # 开启发送端确认,即消息到达mq服务器就会执行回调函数
+    publisher-confirm-type: correlated
+    # 开启发送端返回,即消息到达队列就会执行回调函数
+    publisher-returns: true
+    template:
+      mandatory: true
+    # 只要抵达队列，以异步的方式发送，优先回调我们的这个returnconfirm
+    listener:
+      simple:
+        # 消费端手动ack消息
+        acknowledge-mode: manual
+feign:
+  client:
+    config:
+      default:
+        connect-timeout: 10000
+        read-timeout: 10000

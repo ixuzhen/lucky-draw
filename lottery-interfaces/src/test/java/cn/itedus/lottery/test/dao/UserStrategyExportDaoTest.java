@@ -75,5 +75,15 @@ public class UserStrategyExportDaoTest {
         logger.info("测试结果：{}", JSON.toJSONString(userStrategyExport));
     }
 
+    @Test
+    public void testClaimState() {
+        UserStrategyExport userStrategyExport1 = new UserStrategyExport();
+        userStrategyExport1.setuId("xiaofuge");
+        userStrategyExport1.setId((long) 17);
+        userStrategyExport1.setClaimState(Constants.ClaimState.TIMEOUT.getCode());
+        int i = userStrategyExportDao.updateClaimState(userStrategyExport1);
+        logger.info("测试结果：{}", JSON.toJSONString(i));
+    }
+
 
 }

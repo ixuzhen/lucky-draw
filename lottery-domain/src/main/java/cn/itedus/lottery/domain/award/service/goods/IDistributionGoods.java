@@ -18,7 +18,7 @@ public interface IDistributionGoods {
      * @param req   物品信息
      * @return      配送结果
      */
-    DistributionRes doDistribution(GoodsReq req);
+    DistributionRes oDistribution(GoodsReq req);
 
     Integer getDistributionGoodsName();
 

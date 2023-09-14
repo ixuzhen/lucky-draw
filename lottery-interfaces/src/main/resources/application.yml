@@ -21,17 +21,20 @@ mini-db-router:
       list: db01,db02
       db00:
         driver-class-name: com.mysql.jdbc.Driver
-        url: jdbc:mysql://192.168.192.149:3307/lottery?useUnicode=true
+#        url: jdbc:mysql://192.168.192.149:3307/lottery?useUnicode=true
+        url: jdbc:mysql://localhost:13306/lottery?useUnicode=true
         username: root
         password: 123456
       db01:
         driver-class-name: com.mysql.jdbc.Driver
-        url: jdbc:mysql://192.168.192.149:3307/lottery_01?useUnicode=true
+#        url: jdbc:mysql://192.168.192.149:3307/lottery_01?useUnicode=true
+        url: jdbc:mysql://localhost:13306/lottery_01?useUnicode=true
         username: root
         password: 123456
       db02:
         driver-class-name: com.mysql.jdbc.Driver
-        url: jdbc:mysql://192.168.192.149:3307/lottery_02?useUnicode=true
+#        url: jdbc:mysql://192.168.192.149:3307/lottery_02?useUnicode=true
+        url: jdbc:mysql://localhost:13306/lottery_02?useUnicode=true
         username: root
         password: 123456
 
@@ -40,28 +43,28 @@ mybatis:
   config-location:  classpath:/mybatis/config/mybatis-config.xml
 
 # Dubbo 广播方式配置，如果调用不稳定可以修改为直连模式：https://codechina.csdn.net/KnowledgePlanet/Lottery/-/issues/1
-dubbo:
-  application:
-    name: Lottery
-    version: 1.0.0
-    parameters:
-      unicast: false
-  registry:
-    address: multicast://224.5.6.7:1234
-  protocol:
-    name: dubbo
-    port: 20880
-  scan:
-    base-packages: cn.itedus.lottery.rpc
+#dubbo:
+#  application:
+#    name: Lottery
+#    version: 1.0.0
+#    parameters:
+#      unicast: false
+#  registry:
+#    address: multicast://224.5.6.7:1234
+#  protocol:
+#    name: dubbo
+#    port: 20880
+#  scan:
+#    base-packages: cn.itedus.lottery.rpc
 spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.192.149:8848
+        server-addr: localhost:8848
   application:
     name: lottery
   rabbitmq:
-    host: 192.168.192.149
+    host: localhost
     port: 5672
     virtual-host: /
     # 开启发送端确认,即消息到达mq服务器就会执行回调函数

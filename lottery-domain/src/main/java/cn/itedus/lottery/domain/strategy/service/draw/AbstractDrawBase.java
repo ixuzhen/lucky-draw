@@ -12,12 +12,6 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @description: 定义抽象抽奖过程，模板模式
- * @author：小傅哥，微信：fustack
- * @date: 2021/8/28
- * @Copyright：公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
- */
 public abstract class AbstractDrawBase extends DrawStrategySupport implements IDrawExec {
 
     private Logger logger = LoggerFactory.getLogger(AbstractDrawBase.class);
